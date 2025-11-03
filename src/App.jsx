@@ -1,11 +1,13 @@
-
+import MainLayout from "./layouts/mainLayout.jsx";
 import './App.css'
 
 function App() {
 
 
   return (
-   <div>pagina</div>
+  <>
+    <MainLayout />
+  </>
   )
 }
 
