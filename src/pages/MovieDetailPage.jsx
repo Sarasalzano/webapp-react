@@ -1,3 +1,4 @@
+import ReviewCard from "../components/ReviewCard";
 
 export default function MovieDetailPage(){
     return(
@@ -19,6 +20,11 @@ export default function MovieDetailPage(){
     <section id="reviews">
         <h4>Our Community Reviews</h4>
     </section>
+        <div className="div">
+            <ReviewCard />
+            <ReviewCard />
+            <ReviewCard />
+        </div>
     </>
     );
 }
