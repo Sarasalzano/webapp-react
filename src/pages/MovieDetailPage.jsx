@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react";
 import ReviewCard from "../components/ReviewCard";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function MovieDetailPage(){
+const [movie, setMovie] = useState();
+const { id } = useParams();
+
+    function fetchSingleMovie(){
+        axios.get(`http://localhost:3000/movie/${id}`)
+        .then(res => {setMovie(res.data)})
+        .catch(error => console.log("errore"))
+    }
+
+    useEffect(fetchSingleMovie, []);
+
     return(
     <>
     <header>
