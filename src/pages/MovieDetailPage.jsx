@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function MovieDetailPage(){
-const [movie, setMovie] = useState();
+const [movie, setMovie] = useState(null);
 const { id } = useParams();
 
     function fetchSingleMovie(){
@@ -23,9 +23,10 @@ const { id } = useParams();
                 <div className="col-md-4"></div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <h1 className="card-title">{movie.title}</h1>
-                        <h3 className="sort-by"><i>{movie.director}</i></h3>
-                        <p className="card-text">{movie.abstract}</p>
+                        <img src={`http://localhost:3000/imgs/${movie.image}`} alt={movie?.title} />
+                        <h1 className="card-title">{movie?.title}</h1>
+                        <h3 className="sort-by"><i>{movie?.director}</i></h3>
+                        <p className="card-text">{movie?.abstract}</p>
                     </div>
                 </div>
             </div>
@@ -35,6 +36,7 @@ const { id } = useParams();
         <h4>Our Community Reviews</h4>
     </section>
         <div className="div">
+            <h5>media voto: {movie?.vote}</h5>
             <ReviewCard />
             <ReviewCard />
             <ReviewCard />
