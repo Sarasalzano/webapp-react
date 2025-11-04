@@ -13,7 +13,7 @@ const { id } = useParams();
         .catch(error => console.log("errore"))
     }
 
-    useEffect(fetchSingleMovie, []);
+    useEffect(fetchSingleMovie, [id]);
 
     return(
     <>
@@ -23,9 +23,9 @@ const { id } = useParams();
                 <div className="col-md-4"></div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <h1 className="card-title">Titolo Libro</h1>
-                        <h3 className="sort-by"><i>by Regista</i></h3>
-                        <p className="card-text">Descrizione Film.</p>
+                        <h1 className="card-title">{movie.title}</h1>
+                        <h3 className="sort-by"><i>{movie.director}</i></h3>
+                        <p className="card-text">{movie.abstract}</p>
                     </div>
                 </div>
             </div>
