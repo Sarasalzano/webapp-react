@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReviewCard from "../components/ReviewCard";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import FormReview from "../components/FormReview";
 
 export default function MovieDetailPage(){
 const [movie, setMovie] = useState(null);
@@ -13,6 +14,7 @@ const { id } = useParams();
         .catch(error => console.log("errore"))
     }
 
+
     useEffect(fetchSingleMovie, [id]);
 
     return(
@@ -23,7 +25,7 @@ const { id } = useParams();
                 <div className="col-md-4"></div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <img src={`http://localhost:3000/imgs/${movie.image}`} alt={movie?.title} />
+                        <img src={`http://localhost:3000/imgs/${movie?.image}`} alt={movie?.title} />
                         <h1 className="card-title">{movie?.title}</h1>
                         <h3 className="sort-by"><i>{movie?.director}</i></h3>
                         <p className="card-text">{movie?.abstract}</p>
@@ -34,6 +36,9 @@ const { id } = useParams();
     </header>
     <section id="reviews">
         <h4>Our Community Reviews</h4>
+        <div>
+            <FormReview idProp={id} reloadReviews={fetchSingleMovie} />
+        </div>
     </section>
         <div className="div">
             <h5>media voto: {movie?.vote}</h5>
