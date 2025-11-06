@@ -4,48 +4,52 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import FormReview from "../components/FormReview";
 
-export default function MovieDetailPage(){
-const [movie, setMovie] = useState(null);
-const { id } = useParams();
+export default function MovieDetailPage() {
+    const [movie, setMovie] = useState(null);
+    const { id } = useParams();
 
-    function fetchSingleMovie(){
+    function fetchSingleMovie() {
         axios.get(`http://localhost:3000/movie/${id}`)
-        .then(res => {setMovie(res.data)})
-        .catch(error => console.log("errore"))
+            .then(res => setMovie(res.data))
+            .catch(error => console.log("errore"));
     }
-
 
     useEffect(fetchSingleMovie, [id]);
 
-    return(
-    <>
-    <header>
-        <div className="card mb-3">
-            <div className="row g-0">
-                <div className="col-md-4"></div>
-                <div className="col-md-8">
-                    <div className="card-body">
-                        <img src={`http://localhost:3000/imgs/${movie?.image}`} alt={movie?.title} />
-                        <h1 className="card-title">{movie?.title}</h1>
-                        <h3 className="sort-by"><i>{movie?.director}</i></h3>
-                        <p className="card-text">{movie?.abstract}</p>
+    return (
+        
+            <div className="card-wrapper p-4 " style={{background: "linear-gradient(135deg, #141E30, #325175ff)"}}>
+                <header>
+                        <div className="top-card-wrapper" >
+                            <div ClassName="card" style={{width:"20rem"}}>
+                                <img src={`http://localhost:3000/imgs/${movie?.image}`} alt={movie?.title} style={{height:"30rem"}} />
+                            </div>
+                            <div className="text-wrapper text-white">
+                                <h1 className="card-title">{movie?.title}</h1>
+                                <h3 className="sort-by"><i>{movie?.director}</i></h3>
+                                <p className="card-text">{movie?.abstract}</p>
+                            </div>
+                        </div>
+                </header>
+
+                <section id="reviews">
+                    <h4 className="text-warning m-4">Our Community Reviews</h4>
+                    <div>
+                        <FormReview idProp={id} reloadReviews={fetchSingleMovie} />
                     </div>
+                </section>
+
+                <div className="div">
+                    <h5>{movie?.vote}</h5>
+                    {movie?.reviews?.length > 0 ? (
+                        movie.reviews.map((review, index) => (
+                            <ReviewCard key={index} reviewProp={review} />
+                        ))
+                    ) : (
+                        <p >Nessuna recensione ancora.</p>
+                    )}
                 </div>
             </div>
-        </div>
-    </header>
-    <section id="reviews">
-        <h4>Our Community Reviews</h4>
-        <div>
-            <FormReview idProp={id} reloadReviews={fetchSingleMovie} />
-        </div>
-    </section>
-        <div className="div">
-            <h5>media voto: {movie?.vote}</h5>
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-        </div>
-    </>
+            
     );
 }

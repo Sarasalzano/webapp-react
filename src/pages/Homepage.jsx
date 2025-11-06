@@ -13,12 +13,14 @@ export default function Homepage(){
     useEffect(fetchMovies, []);
 
     return(
-        <>
-        <div className="d-flex flex-wrap m-2">
+        <div className="homepage-wrapper text-white" style={{background: "linear-gradient(135deg, #141E30, #325175ff)"}}>
+        <h3 className="text-warning text-center m-0 p-4">JOIN OUR COMMUNITY AND RATE YOUR FAVOURITE MOVIES</h3>
+        <div className="d-flex flex-wrap">
             {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
         ))}
         </div>
-        </>
+        </div>
+        
     );
 }

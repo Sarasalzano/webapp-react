@@ -25,9 +25,9 @@ const setFieldValue = (e) => {
   setFormData({ ...formData, [name]: value });
 };
     return(
-        <div className="card">
+        <div className="card bg-dark text-white m-4">
         <header>
-            <h5>Add your review</h5>
+            <h5 className="m-3">Add your review</h5>
         </header>
          <div className="card-body">
                 <form onSubmit={handleSubmit}>
@@ -44,7 +44,7 @@ const setFieldValue = (e) => {
                         <input name="vote" type="number" min="1" max="5" className="form-control" value={formData.vote} onChange={setFieldValue} />
                     </div>
                     <div className="d-flex justify-content-end pt-3">
-                        <button type="submit" className="btn btn-primary">Send</button>
+                        <button type="submit" className="btn btn-danger text-white fw-bold">Send</button>
                     </div>
                 </form>
             </div>
